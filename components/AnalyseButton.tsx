@@ -9,9 +9,9 @@ function AnalyseButton() {
     <button
       type="submit"
       disabled={pending}
-      className="px-6 py-2 text-white bg-indigo-600 rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:eing-indigo-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 font-medium hover:cursor-pointer"
+      className="px-6 py-[9px] text-white bg-indigo-400 rounded-lg hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:eing-indigo-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 font-medium hover:cursor-pointer"
     >
-      {pending ? "Analyzing..." : "Analyze"}
+      {pending ? "Seeking" : "Seek"}
     </button>
   );
 }

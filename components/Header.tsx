@@ -24,7 +24,7 @@ function Header() {
               <Link href="/manage-plan">
                 <Button
                   variant="outline"
-                  className="mr-4 bg-gradient-to-r from-indigo-600 to-indigo-400 text-transparent bg-clip-text"
+                  className="mr-4 bg-gradient-to-r from-indigo-600 to-indigo-400 text-transparent bg-clip-text border border-indigo-500 hover:border-indigo-800 hover:cursor-pointer hover:text-indigo-800"
                 >
                   Manage Plan
                 </Button>

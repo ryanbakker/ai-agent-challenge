@@ -81,12 +81,19 @@ const steps = [
 export default function Home() {
   return (
     <div className="min-h-screen">
-      <section className="py-20 bg-gradient-to-b from-white to-gray-50">
+      <section className="py-20 bg-gradient-to-b from-indigo-600 to-indigo-800">
         <div className="container mx-auto px-4">
           <div className="flex flex-col items-center gap-10 text-center mb-12">
-            <AgentPulse size="large" color="indigo" />
-            <h1>Your AI Agent</h1>
-            <p>Intro text</p>
+            <div className="flex flex-row items-center gap-5">
+              <AgentPulse size="large" color="indigo" />
+              <h1 className=" text-6xl uppercase font-semibold bg-gradient-to-tr bg-clip-text from-indigo-300 to-indigo-50 text-transparent">
+                AI Agent
+              </h1>
+            </div>
+            <p className="text-indigo-50">
+              The AI for creators. Saving you time with script creation, and
+              video analysing, so you can fcous on one thing. Creating.
+            </p>
 
             <VideoForm />
           </div>
@@ -95,7 +102,9 @@ export default function Home() {
 
       <section className="py-20 bg-white">
         <div className="container mx-auto px-4 max-w-6xl">
-          <h2 className="text-3xl font-bold text-center mb-12">Features</h2>
+          <h2 className="text-3xl font-bold text-center mb-12 text-indigo-800">
+            Features
+          </h2>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {features.map((feature, index) => {
@@ -104,18 +113,18 @@ export default function Home() {
               return (
                 <div
                   key={index}
-                  className="bg-white p-6 rounded-xl border border-gray-200 hover:border-indigo-500 transition-all duration-300"
+                  className="bg-indigo-50 p-6 rounded-xl border border-indigo-100 hover:border-indigo-500 transition-all duration-300"
                 >
                   <div
-                    className={`w-12 h-12 rounded-lg flex items-center justify-center mb-4 ${feature.iconBg}`}
+                    className={`w-12 h-12 rounded-lg flex items-center justify-center mb-4 bg-indigo-100`}
                   >
-                    <Icon className={`w-6 h-6 ${feature.iconColor}`} />
+                    <Icon className={`w-6 h-6 text-indigo-600`} />
                   </div>
 
-                  <h3 className="text-xl font-semibold mb-2">
+                  <h3 className="text-xl font-semibold mb-2 text-indigo-800">
                     {feature.title}
                   </h3>
-                  <p className="text-gray-600">{feature.description}</p>
+                  <p className="text-indigo-900/60">{feature.description}</p>
                 </div>
               );
             })}
@@ -142,8 +151,10 @@ export default function Home() {
                     <Icon className="w-8 h-8 text-white" />
                   </div>
 
-                  <h3 className="text-xl font-semibold mb-2">{step.title}</h3>
-                  <p className="text-gray-600">{step.description}</p>
+                  <h3 className="text-xl font-semibold mb-2 text-indigo-800">
+                    {step.title}
+                  </h3>
+                  <p className="text-indigo-900/60">{step.description}</p>
                 </div>
               );
             })}
