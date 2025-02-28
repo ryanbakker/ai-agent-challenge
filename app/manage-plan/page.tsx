@@ -8,7 +8,9 @@ function ManagePlan() {
         Manage your subscription and billing details here.
       </p>
 
-      <SchematicComponent componentId="cmpn_CqqDGUzppZ9" />
+      <div className="dark:invert">
+        <SchematicComponent componentId="cmpn_CqqDGUzppZ9" />
+      </div>
     </div>
   );
 }

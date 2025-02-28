@@ -22,7 +22,7 @@ function TitleGeneration({ videoId }: { videoId: string }) {
   };
 
   return (
-    <div className="p-4 border border-gray-200 rounded-xl bg-white">
+    <div className="p-4 border rounded-xl bg-white dark:bg-transparent border-gray-200 dark:border-gray-800">
       <div className="min-w-52">
         <Usage featureFlag={FeatureFlag.TITLE_GENERATIONS} title="Titles" />
       </div>
@@ -51,11 +51,11 @@ function TitleGeneration({ videoId }: { videoId: string }) {
       </div>
 
       {!titles?.length && !!isTitleGenerationEnabled && (
-        <div className="text-center py-8 px-4 rounded-lg mt-4 border-2 border-dashed border-gray-200">
-          <p className="text-gray-600 font-medium">
+        <div className="text-center py-8 px-4 rounded-lg mt-4 border-2 border-dashed border-gray-200 dark:border-gray-600">
+          <p className="text-gray-600 dark:text-gray-400 font-medium">
             No titles have been generated yet
           </p>
-          <p className="text-xs text-gray-400 mt-1">
+          <p className="text-xs text-gray-400 dark:text-gray-600 mt-1">
             Generate titles to see them here
           </p>
         </div>

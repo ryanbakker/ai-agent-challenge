@@ -1,5 +1,6 @@
 "use client";
 
+import PropagateLoader from "react-spinners/PropagateLoader";
 import { FeatureFlag } from "@/features/flags";
 import {
   useSchematicEntitlement,
@@ -25,14 +26,26 @@ function Usage({
     featureUsage && featureAllocation && featureUsage >= featureAllocation;
 
   if (isPending) {
-    return <div className="text-gray-500 text-center py-4">Loading...</div>;
+    return (
+      <div className="flex items-center justify-center py-20">
+        <div className="opacity-60 dark:opacity-0">
+          <PropagateLoader loading size={10} />
+        </div>
+
+        <div className="opacity-0 dark:opacity-60">
+          <PropagateLoader loading size={10} color="#ffffff" />
+        </div>
+      </div>
+    );
   }
 
   if (hasUsedAllTokens) {
     return (
       <div className="bg-white rounded-2xl shadow-sm border border-red-100 p-6">
         <div className="flex justify-between items-center mb-4">
-          <h2 className="text-xl font-semibold text-gray-800">{title}</h2>
+          <h2 className="text-xl font-semibold text-gray-800 dark:text-gray-200">
+            {title}
+          </h2>
           <div className="px-4 py-2 bg-red-50 rounded-lg">
             <span className="font-medium text-red-700">{featureUsage}</span>
             <span className="text-red-400 mx-2">/</span>
@@ -89,18 +102,24 @@ function Usage({
   return (
     <div>
       <div className="flex justify-between items-center mb-4 gap-4">
-        <h2 className="text-xl font-semibold text-gray-800">{title}</h2>
-        <div className="px-4 py-2 bg-gray-50 rounded-lg">
-          <span className="font-medium text-gray-700">{featureUsage}</span>
+        <h2 className="text-xl font-semibold text-gray-800 dark:text-gray-300">
+          {title}
+        </h2>
+        <div className="px-4 py-2 bg-gray-50 dark:bg-gray-700 rounded-lg">
+          <span className="font-medium text-gray-700 dark:text-gray-300">
+            {featureUsage}
+          </span>
           <span className="text-gray-400 mx-2">/</span>
-          <span className="font-medium text-gray-700">{featureAllocation}</span>
+          <span className="font-medium text-gray-700 dark:text-gray-300">
+            {featureAllocation}
+          </span>
         </div>
       </div>
 
       <div className="relative">
         <Progress
           value={progress}
-          className={`h-3 rounded-full bg-gray-100 ${progressColor}`}
+          className={`h-3 rounded-full bg-gray-100 dark:bg-gray-700 ${progressColor}`}
         />
 
         {progress >= 100 ? (

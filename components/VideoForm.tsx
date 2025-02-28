@@ -4,7 +4,7 @@ import { analyseYoutubeVideo } from "@/actions/analyseYoutubeVideo";
 
 function VideoForm() {
   return (
-    <div className="w-full max-w-2xl mx-auto">
+    <div className="w-full max-w-2xl mx-auto z-30">
       <Form
         action={analyseYoutubeVideo}
         className="flex flex-col sm:flex-row gap-2 items-center"

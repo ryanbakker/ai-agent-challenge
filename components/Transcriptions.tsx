@@ -26,7 +26,7 @@ function Transcriptions({ videoId }: { videoId: string }) {
   console.log(user, videoId, setTranscript);
 
   return (
-    <div className="border p-4 pb-0 rounded-xl gap-4 flex flex-col">
+    <div className="border p-4 pb-0 rounded-xl gap-4 flex flex-col border-gray-200 dark:border-gray-800">
       <Usage featureFlag={FeatureFlag.TRANSCRIPTION} title="Transcription" />
 
       {/* Transcription */}

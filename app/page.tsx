@@ -1,10 +1,10 @@
-import AgentPulse from "@/components/AgentPulse";
 import VideoForm from "@/components/VideoForm";
 import {
   AlignJustify,
   Brain,
   ImageIcon,
   MessageSquare,
+  Rocket,
   Sparkles,
   Video,
 } from "lucide-react";
@@ -81,13 +81,13 @@ const steps = [
 export default function Home() {
   return (
     <div className="min-h-screen">
-      <section className="py-20 bg-gradient-to-b from-indigo-600 to-indigo-800">
+      <section className="py-20 bg-gradient-to-tr from-indigo-800 to-indigo-500 dark:from-indigo-950 dark:to-indigo-700">
         <div className="container mx-auto px-4">
           <div className="flex flex-col items-center gap-10 text-center mb-12">
-            <div className="flex flex-row items-center gap-5">
-              <AgentPulse size="large" color="indigo" />
+            <div className="flex flex-col items-center gap-5">
+              <Rocket className="w-16 h-16 text-indigo-200" size={2} />
               <h1 className=" text-6xl uppercase font-semibold bg-gradient-to-tr bg-clip-text from-indigo-300 to-indigo-50 text-transparent">
-                AI Agent
+                Boost Your Creating Potential
               </h1>
             </div>
             <p className="text-indigo-50">
@@ -100,9 +100,9 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-white dark:bg-[#0f172a]/80">
         <div className="container mx-auto px-4 max-w-6xl">
-          <h2 className="text-3xl font-bold text-center mb-12 text-indigo-800">
+          <h2 className="text-3xl font-bold text-center mb-12 text-indigo-800 dark:text-indigo-200">
             Features
           </h2>
 
@@ -113,18 +113,22 @@ export default function Home() {
               return (
                 <div
                   key={index}
-                  className="bg-indigo-50 p-6 rounded-xl border border-indigo-100 hover:border-indigo-500 transition-all duration-300"
+                  className="bg-indigo-50 dark:bg-[#141f38]/80 p-6 rounded-xl border border-indigo-100 dark:border-[#233560]/80 hover:border-indigo-500 dark:hover:border-indigo-900 transition-all duration-300"
                 >
                   <div
-                    className={`w-12 h-12 rounded-lg flex items-center justify-center mb-4 bg-indigo-100`}
+                    className={`w-12 h-12 rounded-lg flex items-center justify-center mb-4 bg-indigo-100 dark:bg-indigo-700/20`}
                   >
-                    <Icon className={`w-6 h-6 text-indigo-600`} />
+                    <Icon
+                      className={`w-6 h-6 text-indigo-600 dark:text-indigo-200`}
+                    />
                   </div>
 
-                  <h3 className="text-xl font-semibold mb-2 text-indigo-800">
+                  <h3 className="text-xl font-semibold mb-2 text-indigo-800 dark:text-indigo-300">
                     {feature.title}
                   </h3>
-                  <p className="text-indigo-900/60">{feature.description}</p>
+                  <p className="text-indigo-900/60 dark:text-indigo-300/50">
+                    {feature.description}
+                  </p>
                 </div>
               );
             })}
@@ -132,9 +136,9 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="py-20 bg-gray-50">
+      <section className="py-20 bg-gray-50 dark:bg-gray-800">
         <div className="container mx-auto px-4 max-w-6xl">
-          <h2 className="text-3xl font-bold text-center mb-12">
+          <h2 className="text-3xl font-bold text-center mb-12 text-indigo-800 dark:text-indigo-200">
             Meet Your AI Agent in 3 Simple Steps
           </h2>
 
@@ -145,16 +149,18 @@ export default function Home() {
               return (
                 <div
                   key={index}
-                  className="text-center p-6 rounded-xl bg-white shadow-md hover:shadow-lg transition-all"
+                  className="text-center border p-6 rounded-xl bg-white dark:bg-slate-700 dark:border-slate-600 shadow-md hover:shadow-lg transition-all"
                 >
-                  <div className="w-16 h-16 bg-gradient-to-r from-indigo-600 to-indigo-400 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <div className="w-16 h-16 bg-gradient-to-tr from-indigo-600 to-indigo-400 rounded-full flex items-center justify-center mx-auto mb-4 dark:from-indigo-900 dark:to-indigo-700">
                     <Icon className="w-8 h-8 text-white" />
                   </div>
 
-                  <h3 className="text-xl font-semibold mb-2 text-indigo-800">
+                  <h3 className="text-xl font-semibold mb-2 text-indigo-800 dark:text-indigo-100">
                     {step.title}
                   </h3>
-                  <p className="text-indigo-900/60">{step.description}</p>
+                  <p className="text-indigo-900/60 dark:text-indigo-200/50">
+                    {step.description}
+                  </p>
                 </div>
               );
             })}
@@ -162,7 +168,7 @@ export default function Home() {
         </div>
       </section>
 
-      <footer className="py-20 px-5 md:px-0 bg-gradient-to-r from-indigo-600 to-indigo-400">
+      <footer className="py-20 px-5 md:px-0 bg-gradient-to-r from-indigo-600 to-indigo-400 dark:from-indigo-950 dark:to-indigo-800">
         <div className="text-center">
           <h2 className="text-3xl font-bold text-white mb-6">
             Ready to Meet Your AI Content Agent?

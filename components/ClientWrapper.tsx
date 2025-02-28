@@ -3,6 +3,7 @@
 import { SchematicProvider } from "@schematichq/schematic-react";
 import SchematicWrapped from "./SchematicWrapped";
 import { ConvexClientProvider } from "./ConexClientProvider";
+import { ThemeProvider } from "./themes/ThemeProvider";
 
 export default function RootLayout({
   children,
@@ -18,7 +19,16 @@ export default function RootLayout({
   return (
     <ConvexClientProvider>
       <SchematicProvider publishableKey={schematicPubKey}>
-        <SchematicWrapped>{children}</SchematicWrapped>
+        <SchematicWrapped>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            {children}
+          </ThemeProvider>
+        </SchematicWrapped>
       </SchematicProvider>
     </ConvexClientProvider>
   );

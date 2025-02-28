@@ -3,22 +3,81 @@
 import ThumbnailGeneration from "@/components/ThumbnailGeneration";
 import TitleGeneration from "@/components/TitleGeneration";
 import Transcriptions from "@/components/Transcriptions";
+import { Button } from "@/components/ui/button";
 import Usage from "@/components/Usage";
 import YoutubeVideoDeatils from "@/components/YoutubeVideoDetails";
 import { FeatureFlag } from "@/features/flags";
+import Link from "next/link";
 import { useParams } from "next/navigation";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { useEffect, useState } from "react";
+import { VideoDetails } from "@/types/types";
+import { getVideoDetails } from "@/actions/getVideoDetails";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 function AnalysisPage() {
   const params = useParams<{ videoId: string }>();
   const { videoId } = params;
 
+  const [video, setVideo] = useState<VideoDetails | null>(null);
+
+  useEffect(() => {
+    const fetchVideoDetails = async () => {
+      const video = await getVideoDetails(videoId);
+      if (video) {
+        setVideo(video);
+      }
+    };
+
+    fetchVideoDetails();
+  }, [videoId]);
+
   return (
     <div className="xl:container mx-auto px-4 md:px-0">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
         {/* Left Side */}
-        <section className="order-2 lg:order-1 flex flex-col gap-4 bg-white lg:border-r border-gray-200 p-6">
+        <section className="order-2 lg:order-1 flex flex-col gap-4 bg-white lg:border-r border-gray-200 dark:bg-transparent dark:border-gray-800 p-6">
+          <div className="flex gap-4">
+            <Button
+              variant="outline"
+              className="cursor-pointer hover:bg-indigo-50 hover:text-indigo-950 transition-all duration-200"
+            >
+              <Link href="/">Return</Link>
+            </Button>
+
+            <div className="flex w-full">
+              <Select>
+                <SelectTrigger>
+                  <SelectValue
+                    placeholder={video ? video?.title : "Loading..."}
+                  />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectGroup>
+                    <SelectItem value="a">Placeholder</SelectItem>
+                  </SelectGroup>
+                </SelectContent>
+              </Select>
+            </div>
+          </div>
+
           {/* Analysis */}
-          <div className="flex flex-col gap-4 p-4 border border-gray-200 rounded-xl">
+          <div className="flex flex-col gap-4 p-4 border border-gray-200 dark:border-gray-800 rounded-xl">
             <Usage
               featureFlag={FeatureFlag.ANALYSE_VIDEO}
               title="Analyse Video"
