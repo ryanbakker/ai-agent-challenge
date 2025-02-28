@@ -9,14 +9,6 @@ import YoutubeVideoDeatils from "@/components/YoutubeVideoDetails";
 import { FeatureFlag } from "@/features/flags";
 import Link from "next/link";
 import { useParams } from "next/navigation";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
 import { useEffect, useState } from "react";
 import { VideoDetails } from "@/types/types";
 import { getVideoDetails } from "@/actions/getVideoDetails";
@@ -25,7 +17,6 @@ import {
   SelectContent,
   SelectGroup,
   SelectItem,
-  SelectLabel,
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";

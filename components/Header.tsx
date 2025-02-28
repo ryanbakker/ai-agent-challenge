@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import AgentPulse from "./AgentPulse";
 import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
 import { Button } from "./ui/button";
 import ThemeToggle from "./themes/ThemeToggle";
