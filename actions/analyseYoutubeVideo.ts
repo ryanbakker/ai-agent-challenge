@@ -1,6 +1,6 @@
 "use server";
 
-// import {getVideoIdFromUrl} from "@/lib/youtube/getVideoIdFromUrl";
+import { getVideoIdFromUrl } from "@/lib/getVideoFromUrl";
 import { redirect } from "next/navigation";
 
 export async function analyseYoutubeVideo(formData: FormData) {
@@ -8,8 +8,9 @@ export async function analyseYoutubeVideo(formData: FormData) {
 
   if (!url) return;
 
-  const videoId = "abc"; // todo
+  const videoId = getVideoIdFromUrl(url);
   if (!videoId) return;
 
+  // Redirect to video analysis page
   redirect(`/video/${videoId}/analysis`);
 }
