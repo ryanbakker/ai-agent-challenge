@@ -3,8 +3,9 @@
 import { FeatureFlag } from "@/features/flags";
 import { useUser } from "@clerk/nextjs";
 import { useSchematicEntitlement } from "@schematichq/schematic-react";
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import Usage from "./Usage";
+import { getYoutubeTranscript } from "@/actions/getYoutubeTranscript";
 
 interface TranscriptEntry {
   text: string;
@@ -24,6 +25,24 @@ function Transcriptions({ videoId }: { videoId: string }) {
   );
 
   console.log(user, videoId, setTranscript);
+
+  const handleGenerateTranscription = useCallback(
+    async (videoId: string) => {
+      if (featureUsageExceeded) {
+        console.log("Transcription limit reached, the user must upgrade");
+        return;
+      }
+
+      const result = await getYoutubeTranscript(videoId);
+
+      setTranscript(result);
+    },
+    [featureUsageExceeded]
+  );
+
+  useEffect(() => {
+    handleGenerateTranscription(videoId);
+  }, [handleGenerateTranscription, videoId]);
 
   return (
     <div className="border p-4 pb-0 rounded-xl gap-4 flex flex-col border-gray-200 dark:border-gray-800">

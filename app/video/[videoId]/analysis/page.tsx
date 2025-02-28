@@ -10,8 +10,6 @@ import { FeatureFlag } from "@/features/flags";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
-import { VideoDetails } from "@/types/types";
-import { getVideoDetails } from "@/actions/getVideoDetails";
 import {
   Select,
   SelectContent,
@@ -20,23 +18,59 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import AiAgentChat from "@/components/AiAgentChat";
+import { Doc } from "@/convex/_generated/dataModel";
+import { useUser } from "@clerk/nextjs";
+import { createOrGetVideo } from "@/actions/createOrGetVideo";
 
 function AnalysisPage() {
   const params = useParams<{ videoId: string }>();
   const { videoId } = params;
-
-  const [video, setVideo] = useState<VideoDetails | null>(null);
+  const { user } = useUser();
+  const [video, setVideo] = useState<Doc<"videos"> | null | undefined>(
+    undefined
+  );
 
   useEffect(() => {
-    const fetchVideoDetails = async () => {
-      const video = await getVideoDetails(videoId);
-      if (video) {
-        setVideo(video);
+    if (!user?.id) return;
+
+    const fetchVideo = async () => {
+      const response = await createOrGetVideo(videoId as string, user.id);
+      if (!response.success) {
+        // toast
+      } else {
+        setVideo(response.data!);
       }
     };
 
-    fetchVideoDetails();
-  }, [videoId]);
+    fetchVideo();
+  }, [videoId, user]);
+
+  const VideoTranscriptionStatus =
+    video === undefined ? (
+      <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-gray-50 border border-gray-200 rounded-full">
+        <div className="w-2 h-2 bg-gray-400 rounded-full animate-pulse" />
+        <span className="text-sm text-gray-700">Loading...</span>
+      </div>
+    ) : !video ? (
+      <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-gray-50 border border-gray-200 rounded-full">
+        <div className="w-2 h-2 bg-gray-400 rounded-full animate-pulse" />
+        <p className="text-sm text-amber-700">
+          This is your first time analyzing this video. <br />
+          <span className="font-semibold">
+            (1 Analysis token in being used!)
+          </span>
+        </p>
+      </div>
+    ) : (
+      <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-gray-50 border border-gray-200 rounded-full">
+        <div className="w-2 h-2 bg-gray-400 rounded-full animate-pulse" />
+        <p className="text-sm text-green-700">
+          Analysis exists for this video - no additional tokens needed in future
+          calls!
+        </p>
+      </div>
+    );
 
   return (
     <div className="xl:container mx-auto px-4 md:px-0">
@@ -51,7 +85,7 @@ function AnalysisPage() {
               <Link href="/">Return</Link>
             </Button>
 
-            <div className="flex w-full">
+            {/* <div className="flex w-full">
               <Select>
                 <SelectTrigger>
                   <SelectValue
@@ -64,7 +98,7 @@ function AnalysisPage() {
                   </SelectGroup>
                 </SelectContent>
               </Select>
-            </div>
+            </div> */}
           </div>
 
           {/* Analysis */}
@@ -74,7 +108,7 @@ function AnalysisPage() {
               title="Analyse Video"
             />
 
-            {/* Video Status */}
+            {VideoTranscriptionStatus}
           </div>
 
           {/* Video Details */}
@@ -92,7 +126,7 @@ function AnalysisPage() {
 
         {/* Right Side */}
         <section className="order-1 lg:order-2 lg:sticky lg:top-20 h-[500px] md:h-[calc(100vh-6em)]">
-          Agent
+          <AiAgentChat videoId={videoId} />
         </section>
       </div>
     </div>
