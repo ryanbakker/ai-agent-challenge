@@ -11,6 +11,10 @@ const nextConfig: NextConfig = {
         hostname: "yt3.ggpht.com",
         protocol: "https",
       },
+      {
+        hostname: "valiant-labrador-150.convex.cloud",
+        protocol: "https",
+      },
     ],
   },
 };

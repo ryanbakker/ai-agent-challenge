@@ -24,12 +24,13 @@ const formatToolInvocation = (part: ToolPart) => {
 };
 
 function AiAgentChat({ videoId }: { videoId: string }) {
-  const { messages, input, handleInputChange, handleSubmit, append } = useChat({
-    maxSteps: 5,
-    body: {
-      videoId,
-    },
-  });
+  const { messages, input, handleInputChange, handleSubmit, append, status } =
+    useChat({
+      maxSteps: 5,
+      body: {
+        videoId,
+      },
+    });
 
   const isScriptGenerationEnabled = useSchematicFlag(
     FeatureFlag.SCRIPT_GENERATION
@@ -160,15 +161,28 @@ function AiAgentChat({ videoId }: { videoId: string }) {
               type="text"
               value={input}
               onChange={handleInputChange}
-              placeholder="Enter a question..."
+              placeholder={
+                !isVideoAnalysisEnabled
+                  ? "Upgrade to ask anything about your video..."
+                  : "Ask anything about your video..."
+              }
               className="flex-1 px-4 py-2 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             />
 
             <Button
               type="submit"
               className="px-4 py-2 bg-blue-500 text-white text-sm rounded-lg hover:bg-blue-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              disabled={
+                status === "streaming" ||
+                status === "submitted" ||
+                !isVideoAnalysisEnabled
+              }
             >
-              Send
+              {status === "streaming"
+                ? "AI is replying..."
+                : status === "submitted"
+                ? "AI is thinking..."
+                : "Send"}
             </Button>
           </form>
 

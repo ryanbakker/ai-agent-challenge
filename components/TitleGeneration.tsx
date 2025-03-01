@@ -5,10 +5,12 @@ import Usage from "./Usage";
 import { FeatureFlag } from "@/features/flags";
 import { useSchematicEntitlement } from "@schematichq/schematic-react";
 import { Copy } from "lucide-react";
+import { useQuery } from "convex/react";
+import { api } from "@/convex/_generated/api";
 
 function TitleGeneration({ videoId }: { videoId: string }) {
   const { user } = useUser();
-  const titles: { title: string; _id: string }[] = []; // Pull from convex
+  const titles = useQuery(api.titles.list, { videoId, userId: user?.id ?? "" });
 
   console.log(user, videoId);
 
