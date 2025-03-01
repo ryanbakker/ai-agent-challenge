@@ -67,13 +67,18 @@ function AiAgentChat({ videoId }: { videoId: string }) {
   };
 
   const generateTitle = async () => {
+    console.log("🚀 [UI] Generate title button clicked");
     const randomId = Math.random().toString(36).substring(2, 15);
+    console.log("🔍 [UI] Generated random ID:", randomId);
     const userMessage: Message = {
       id: `generate-title-${randomId}`,
       role: "user",
-      content: "Generate a title for this video",
+      content:
+        "Generate a title for this video. Please analyze the video details and transcript to create an SEO-optimized, engaging title that accurately represents the content. Consider current YouTube trends and best practices for title optimization.",
     };
+    console.log("📝 [UI] Appending user message:", userMessage);
     append(userMessage);
+    console.log("✅ [UI] Message appended to chat");
   };
 
   return (
