@@ -10,14 +10,6 @@ import { FeatureFlag } from "@/features/flags";
 import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import AiAgentChat from "@/components/AiAgentChat";
 import { Doc } from "@/convex/_generated/dataModel";
 import { useUser } from "@clerk/nextjs";
