@@ -31,12 +31,21 @@ export default function SignInPage() {
             </span>
           </Clerk.Connection>
 
-          <Link
-            href="/sign-up"
-            className="text-xs text-center text-gray-400 pt-4 hover:underline"
-          >
-            Don't have an account?
-          </Link>
+          <div className="flex flex-col gap-2">
+            <Link
+              href="/sign-in"
+              className="text-xs text-center text-gray-400 pt-4 hover:underline"
+            >
+              Already have an account?
+            </Link>
+
+            <Link
+              href="/"
+              className="text-xs text-center text-gray-400 pt-4 hover:underline"
+            >
+              Go back
+            </Link>
+          </div>
         </div>
       </SignIn.Step>
     </SignIn.Root>
