@@ -30,23 +30,20 @@ function Header() {
               <Link href="/manage-plan">
                 <Button
                   variant="outline"
-                  className="bg-gradient-to-r from-indigo-600 to-indigo-400 text-transparent bg-clip-text border border-indigo-500 hover:border-indigo-800 hover:cursor-pointer hover:text-indigo-800"
+                  className="bg-gradient-to-r from-indigo-600 to-indigo-400 text-transparent bg-clip-text border border-indigo-500 dark:border-indigo-600 dark:text-indigo-600 dark:hover:text-indigo-500 hover:border-indigo-800 hover:cursor-pointer hover:text-indigo-800 dark:hover:border-indigo-500 transition-all"
                 >
                   Manage Plan
                 </Button>
               </Link>
 
-              <div className="w-9.5 h-9.5 flex items-center justify-center rounded-full border border-indigo-600">
+              <div className="w-9.5 h-9.5 flex items-center justify-center rounded-full border border-indigo-600 hover:border-indigo-500 transition-all">
                 <UserButton />
               </div>
             </SignedIn>
 
             <SignedOut>
-              <SignInButton mode="modal">
-                <Button
-                  variant="ghost"
-                  className="bg-gradient-to-r from-indigo-600 to-indigo-600 text-transparent bg-clip-text hover:cursor-pointer"
-                >
+              <SignInButton>
+                <Button className="px-8 bg-indigo-600 text-indigo-50 hover:text-indigo-100 hover:bg-indigo-700 transition-all cursor-pointer">
                   Sign in
                 </Button>
               </SignInButton>

@@ -44,6 +44,109 @@
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.87 0 0);
+
+  --secondary-glow: conic-gradient(
+    from 10deg at 50% 50%,
+    #ff4d8d 0deg,      /* Slightly muted neon pink */
+    #66d4ff 55deg,     /* Slightly muted neon blue */
+    #33ffd8 120deg,    /* Slightly muted neon teal */
+    #ff4d8d 160deg,    /* Back to muted pink */
+    transparent 360deg
+  );
+
+  --third-glow: conic-gradient(
+    from 90deg at 50% 50%,
+    #ff9449 0deg,      /* Slightly muted neon orange */
+    #ff4d8d 160deg,    /* Slightly muted neon pink */
+    #66d4ff 120deg,    /* Slightly muted neon blue */
+    #33ffd8 55deg,     /* Slightly muted neon teal */
+    transparent 360deg
+  );
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.signContainer::before,
+.signContainer::after {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  opacity:0.7
+}
+
+.signContainer::before {
+  background: var(--third-glow);
+  border-radius: 50%;
+  width: 50vw;
+  height: 50vw;
+  margin-left: -200px;
+  filter:blur(90px);  
+  top: calc(50vh - 50vw/2);
+  left: calc(50vw );
+}
+
+.signContainer::after {
+  background: var(--secondary-glow);
+  border-radius: 50%;
+  width: 500px;
+  height: 700px;
+  filter:blur(90px);
+  top: calc(50vh - 50vw/2);
+  left: calc(50vw - 50vw/2);
+}
+
+@keyframes animateBefore {
+  0% {
+    transform: translateY(0) translateX(0) scale(1);
+  }
+  25% {
+    transform: translateY(150px) translateX(100px) scale(0.9);
+  }
+  50% {
+    transform: translateY(250px) translateX(-100px) scale(0.85);
+  }
+  75% {
+    transform: translateY(100px) translateX(150px) scale(0.95);
+  }
+  100% {
+    transform: translateY(0) translateX(0) scale(1);
+  }
+}
+
+@keyframes animateAfter {
+  0% {
+    transform: translateX(0) translateY(0) scale(1);
+  }
+  25% {
+    transform: translateX(-200px) translateY(100px) scale(1.1);
+  }
+  50% {
+    transform: translateX(-150px) translateY(-150px) scale(1.15);
+  }
+  75% {
+    transform: translateX(100px) translateY(50px) scale(0.95);
+  }
+  100% {
+    transform: translateX(0) translateY(0) scale(1);
+  }
+}
+
+.signContainer::before {
+  /*...previous props*/
+  animation: animateBefore 15s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+.signContainer::after {
+  /*...previous props*/
+  animation: animateAfter 18s cubic-bezier(0.4, 0, 0.2, 1) infinite;
 }
 
 .dark {
