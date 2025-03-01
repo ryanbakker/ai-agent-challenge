@@ -33,7 +33,7 @@ async function fetchTranscript(videoId: string): Promise<TranscriptEntry[]> {
     const transcript: TranscriptEntry[] =
       transcriptData.transcript.content?.body?.initial_segments.map(
         (segment) => ({
-          text: segment.snippet.text ?? "N/A",
+          text: segment.snippet.text ?? "---",
           timestamp: formatTimestamp(Number(segment.start_ms)),
         })
       ) ?? [];

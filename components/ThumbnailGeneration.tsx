@@ -20,7 +20,7 @@ function ThumbnailGeneration({ videoId }: { videoId: string }) {
       <div className="min-w-52">
         <Usage
           featureFlag={FeatureFlag.IMAGE_GENERATION}
-          title="Thumbnail Generation"
+          title="Generated Thumbnails"
         />
       </div>
 

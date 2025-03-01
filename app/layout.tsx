@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import ClientWrapper from "@/components/ClientWrapper";
 import Header from "@/components/Header";
+import { Toaster } from "@/components/ui/sonner";
 
 export const metadata: Metadata = {
   title: "AI Agent Challenge",
@@ -19,6 +20,7 @@ export default function RootLayout({
         <ClientWrapper>
           <Header />
           <main>{children}</main>
+          <Toaster />
         </ClientWrapper>
       </body>
     </html>

@@ -26,7 +26,10 @@ function TitleGeneration({ videoId }: { videoId: string }) {
   return (
     <div className="p-4 border rounded-xl bg-white dark:bg-transparent border-gray-200 dark:border-gray-800">
       <div className="min-w-52">
-        <Usage featureFlag={FeatureFlag.TITLE_GENERATIONS} title="Titles" />
+        <Usage
+          featureFlag={FeatureFlag.TITLE_GENERATIONS}
+          title="Generated Titles"
+        />
       </div>
 
       <div className="space-y-3 mt-4 max-h-[280px] overflow-y-auto">

@@ -7,6 +7,7 @@ import { checkFeatureUsageLimit } from "@/lib/checkFeatureUsageLimit";
 import { getConvexClient } from "@/lib/convex";
 import { client } from "@/lib/schematic";
 import { currentUser } from "@clerk/nextjs/server";
+import { getVideoDetails } from "@/actions/getVideoDetails";
 
 export interface VideoResponse {
   success: boolean;
@@ -47,41 +48,60 @@ export const createOrGetVideo = async (
     });
 
     if (!video) {
-      // Analyse Video
+      // Get video details from YouTube
+      const videoDetails = await getVideoDetails(videoId);
+      if (!videoDetails) {
+        return {
+          success: false,
+          error: "Failed to fetch video details",
+        };
+      }
+
+      // Create new video entry with title
+      const newVideoId = await convex.mutation(api.videos.createVideoEntry, {
+        videoId,
+        userId,
+        title: videoDetails.title,
+      });
+
+      const newVideo = await convex.query(api.videos.getVideoById, {
+        videoId: newVideoId,
+        userId,
+      });
+
+      console.log("Tracking analyze video event...");
+      await client.track({
+        event: featureFlagEvents[FeatureFlag.ANALYSE_VIDEO].event,
+        company: {
+          id: userId,
+        },
+        user: {
+          id: userId,
+        },
+      });
+
+      return {
+        success: true,
+        data: newVideo!,
+      };
     } else {
-      console.log("Video exists");
+      // Update title if it doesn't exist
+      if (!video.title) {
+        const videoDetails = await getVideoDetails(videoId);
+        if (videoDetails) {
+          await convex.mutation(api.videos.updateVideoTitle, {
+            videoId,
+            userId,
+            title: videoDetails.title,
+          });
+        }
+      }
 
       return {
         success: true,
         data: video,
       };
     }
-
-    const newVideoId = await convex.mutation(api.videos.createVideoEntry, {
-      videoId,
-      userId,
-    });
-
-    const newVideo = await convex.query(api.videos.getVideoById, {
-      videoId: newVideoId,
-      userId,
-    });
-
-    console.log("Tracking analyze video event...");
-    await client.track({
-      event: featureFlagEvents[FeatureFlag.ANALYSE_VIDEO].event,
-      company: {
-        id: userId,
-      },
-      user: {
-        id: userId,
-      },
-    });
-
-    return {
-      success: true,
-      data: newVideo!,
-    };
   } catch (error) {
     console.error("Error creating or getting video: ", error);
     return {
